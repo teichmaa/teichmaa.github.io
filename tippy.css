@@ -1,0 +1,61 @@
+
+.tippy-box {
+    background: #f8f8f8;
+    border: 1px solid var(--text-color);
+    border-radius: 8px;
+}
+
+.tippy-content {
+    padding: 8px;
+    border-radius: 8px;
+}
+
+.tippy-arrow {
+    color: var(--text-color);
+}
+
+.tooltip-img {
+    background: white;
+    display: block;
+    width: auto;
+    height: auto;
+    max-height: min(800px, 80vh);
+    max-width: 90vw;
+}
+
+.tooltip-trigger {
+    cursor: help;
+    text-decoration: underline;
+    text-underline-offset: 10%;
+    text-decoration-thickness: 3%;
+}
+
+@media (max-width: 575px) { /* Smaller than sm */
+    .tooltip-img {
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767px) { /* sm */
+    .tooltip-img {
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) { /* md */
+    .tooltip-img {
+    }
+}
+
+@media (min-width: 992px) { /* lg and above */
+    .tooltip-img {
+        max-width: 900px;
+    }
+}
+
+[data-tippy-root] > div {
+    background-color: var(--bg-contrast);
+    color: var(--text-light);
+}
+
+[data-tippy-root] .tippy-arrow {
+    color: var(--bg-contrast);
+}

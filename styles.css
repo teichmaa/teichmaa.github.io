@@ -1,0 +1,267 @@
+:root {
+    /* Primary Color Tokens */
+    --color-sunset-orange: #F4A261;
+    --color-mango-yellow: #FEC89A;
+    --color-sky-blue: #8bade4;
+    --color-coral-pink: #FFADAD;
+    --color-mint-green: #C6E2A6;
+    --color-text-dark-blue: #3A506B;
+    --color-text-brown: #5C4033; /* not used */
+    --color-text-purple: #5E548E;
+    --color-gray-dark: #4A4A4A;
+    --color-gray-light: #EAEAEA;
+    --color-white: #FFFFFF;
+
+    /* Secondary Tokens */
+    --primary: var(--color-sunset-orange);
+    --secondary: var(--color-sky-blue);
+    --tertiary: var(--color-mint-green);
+
+    --text-dark-warm: var(--color-text-brown);
+    --text-dark-cold: var(--color-text-dark-blue);
+    --text-light: var(--color-white);
+
+    --bg-pink: var(--color-coral-pink);
+    --bg-white: var(--color-white);
+    --bg-muted: var(--color-gray-light);
+    --bg-accent: var(--color-mango-yellow);
+    --bg-contrast: var(--color-text-dark-blue);
+
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+
+    /*💡 Best Practices*/
+    /*Use --text-dark on light backgrounds for readability.*/
+    /*Use --text-light only on dark or contrast backgrounds.*/
+    /*For buttons & highlights, use --primary, --secondary, or --tertiary.*/
+    /*Use --bg-muted to separate sections subtly.*/
+
+    /* Override Bootstrap color variables */
+    --bs-primary-rgb: 244, 162, 97;
+    --bs-secondary-rgb: 160, 196, 255;
+    --bs-tertiary-rgb: 198, 226, 166;
+    --bs-body-bg-rgb: 255, 255, 255;
+    --bs-body-color-rgb: 58, 80, 107;
+    --bs-light-rgb: 255, 173, 173;
+    --bs-dark-rgb: 58, 80, 107;
+    --bs-link-color-rgb: 160, 196, 255;
+    --bs-link-hover-color-rgb: 94, 84, 142;
+
+}
+
+    .btn-primary {
+        /* Primary Button Customization */
+        --bs-btn-color: #fff;
+        --bs-btn-bg: #F4A261; /* Sunset Orange */
+        --bs-btn-border-color: #F4A261;
+
+        --bs-btn-hover-color: #fff;
+        --bs-btn-hover-bg: #E08E45; /* Darker Orange for Hover */
+        --bs-btn-hover-border-color: #E08E45;
+
+        --bs-btn-active-color: #fff;
+        --bs-btn-active-bg: #D67836; /* Even Darker Orange for Active */
+        --bs-btn-active-border-color: #D67836;
+
+        --bs-btn-disabled-color: #fff;
+        --bs-btn-disabled-bg: #FEC89A; /* Mango Yellow for Disabled */
+        --bs-btn-disabled-border-color: #FEC89A;
+
+        background-color: var(--bs-btn-bg);
+        border-color: var(--bs-btn-border-color);
+    }
+
+.text-primary {
+    color: var(--primary) !important;
+}
+
+.color-box {
+    padding: 8px;
+    margin: 16px;
+}
+
+.box-prim {
+    background-color: var(--primary);
+    color: var(--text-light);
+}
+
+.box-sec {
+    background-color: var(--secondary);
+    color: var(--text-light);
+}
+
+.box-tert {
+    background-color: var(--tertiary);
+    color: var(--text-dark-warm);
+}
+
+.box-contrast {
+    background-color: var(--bg-contrast);
+    color: var(--text-light);
+}
+
+.box-muted {
+    background-color: var(--bg-muted);
+    color: var(--text-dark-cold);
+}
+
+.box-white {
+    background-color: var(--bg-white);
+    color: var(--text-dark-warm);
+}
+
+.box-pink {
+    background-color: var(--bg-pink);
+    color: var(--text-dark-cold);
+}
+
+
+body {
+    background-color: var(--bg-white);
+    color: var(--text-dark-warm);
+    font-family: 'Quicksand', sans-serif;
+}
+
+body {
+    font-family: Quicksand, sans-serif;
+    background-color: var(--bg-white);
+    color: var(--text-dark-warm);
+    margin: 0;
+    padding: 0;
+}
+
+.hero {
+    background-image: linear-gradient(
+            rgba(0, 0, 0, 0.3),
+            rgba(0, 0, 0, 0.3)
+    ), url('img/cool.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.hero h1 {
+    margin-top: -150px;
+}
+
+ul.checkbox, ul.checkbox-fun {
+    list-style: none;
+    padding: 0;
+}
+
+ul.checkbox li::before {
+    content: "✔";
+    color: var(--primary);
+    margin-right: 8px;
+}
+
+ul.checkbox-fun li::before {
+    content: "✨";
+    color: var(--primary);
+    margin-right: 8px;
+}
+
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--color-gray-light);
+}
+
+.separator:not(:empty)::before {
+    margin-right: .5em;
+}
+
+.separator:not(:empty)::after {
+    margin-left: .5em;
+}
+
+.sep-1 {
+    font-style: italic;
+    color: var(--color-gray-light);
+}
+
+.sep-2 {
+    font-style: italic;
+    color: var(--color-gray-dark);
+}
+
+
+.tonda-cols-3 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap:24px;
+}
+.tonda-cols-3 > div {
+    flex-grow: 1;
+    flex-basis: 30%;
+}
+
+.tonda-cols-2 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+.tonda-cols-2 > div {
+    flex-grow: 1;
+    flex-basis: 45%;
+}
+
+.quote span {
+    margin-right: 32px;
+}
+
+@media (max-width: 575px) {
+    .tonda-cols-3  > div {
+        flex-basis: 100%;
+    }
+    .tonda-cols-2  > div {
+        flex-basis: 100%;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+    .tonda-cols-3 > div {
+        flex-basis: 100%;
+    }
+    .tonda-cols-2 > div {
+        flex-basis: 100%;
+    }
+}
+
+@media (min-width: 992px)  {
+    .quote {
+        width: min-content;
+    }
+    .quote > p {
+        text-wrap: nowrap;
+    }
+    .quote span {
+        margin-right: 0;
+    }
+}
+
+#tooltip-personal {
+    /*border: 1px solid var(--color-gray-light);*/
+    /*border-radius: 50%;*/
+    /*padding: 4px;*/
+    /*background-color: #fafafa;*/
+    text-decoration: underline;
+}

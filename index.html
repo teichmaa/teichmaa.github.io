@@ -1,1 +1,295 @@
-Zdarec
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tóňa slaví</title>
+
+    <link href="bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="decrypt.js"></script>
+    <script>
+        async function unlockContent() {
+            const encryptedDataResponse = await fetch('./encryptedData.json');
+            const encryptedData = await encryptedDataResponse.text()
+
+            let password;
+            if (localStorage.getItem("password")) {
+                password = localStorage.getItem("password");
+            } else {
+                password = prompt("Zadej heslo od Tóni:");
+                if (!password) return;
+                localStorage.setItem("password", password);
+            }
+            if (!password) {
+                alert('Bez hesla to nepůjde');
+                document.querySelector("body").remove();
+                return;
+            }
+
+            const decryptedData = await decryptData(encryptedData, password);
+            const data = JSON.parse(decryptedData);
+            console.log(data);
+            if (data) {
+                document.getElementById("when-date").innerText = data.when.date;
+                document.getElementById("when-days").innerText = data.when.days;
+                document.getElementById("location-town").innerText = data.where.town;
+                document.getElementById("location-town6p").innerText = data.where.town6p;
+                document.getElementById("location-venue").innerText = data.where.venue;
+                document.getElementById("location-link").href = data.where.link;
+                document.getElementById("location-train").innerText = data.where.train;
+                document.getElementById("form-link-1").href = data.formLink;
+                document.getElementById("form-link-2").href = data.formLink;
+                document.querySelector("body").style.display = 'block';
+            } else {
+                document.querySelector("body").remove();
+                alert("Něco se pokazilo, data nenačtena. Kontaktuj Tóňu");
+            }
+        }
+    </script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/dist/tippy.css">
+    <link rel="stylesheet" href="tippy.css">
+</head>
+<body onload="unlockContent()" style="display: none">
+<header class="hero text-center text-white d-flex align-items-center justify-content-center">
+    <div class="px-2">
+        <h1 class="display-1 strong fw-bold text-primary">Konečně dospělost</h1>
+        <p class="lead display-6">Roky a roky jsem narozeniny neslavil. Letos to doženeme.</p>
+    </div>
+</header>
+
+<section class="date-banner text-center py-5 box-prim">
+    <h2>📅 📍</h2>
+    <p class="display-1 pt-1" id="when-date">&nbsp;</p>
+    <p class="h5 pb-4 mt-n1" id="when-days">&nbsp;</p>
+    <p class="display-6"><span id="location-town">&nbsp;</span>, <span class="tooltip-trigger"
+                                                                       data-img="img/cesky_raj.jpg">Český ráj</span></p>
+</section>
+
+<section class="container py-5 px-3">
+    <h2 class="text-center mb-4">Program</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <h3>Pátek</h3>
+            <ul class="checkbox">
+                <li><span class="tooltip-trigger" data-img="img/prijezd.jpg">Příjezd</span> (odpoledne, podvečer)</li>
+                <li><span class="tooltip-trigger" data-img="img/taborak_2.jpg">Oheň</span></li>
+                <li>Oslava slunovratu</li>
+                <li><span class="tooltip-trigger" data-img="img/kytara.jpg">Kytarování</span></li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h3 class="pt-5">Sobota</h3>
+            <ul class="checkbox">
+                <li>Ranní <span class="tooltip-trigger" data-img="img/meditace.jpg">meditace</span></li>
+                <li>Dopolední <span class="tooltip-trigger" data-img="img/pohodicka.jpg">pohodička</span></li>
+                <li>Výlet na skály, možná i <span class="tooltip-trigger" data-img="img/hrad_kost.jpg">na hrad</span></li>
+                <li><span class="tooltip-trigger" data-img="img/energy.jpg">Rituál dospělosti</span></li>
+                <li>Bezlepkový chléb a <span class="tooltip-trigger" data-img="img/hry_2.jpg">hry</span></li>
+                <li><span class="tooltip-trigger" data-img="img/proslov.jpg">Proslov</span></li>
+                <li>Žraut</li>
+                <li><span class="tooltip-trigger" data-img="img/tanec_1.jpg">Tanec</span>, a ještě <span class="tooltip-trigger" data-img="img/tanec_2.png">tanec</span></li>
+                <li><span class="tooltip-trigger" data-img="img/fotokoutek_1.jpg">Fotokoutek</span>, samozřejmě</li>
+                <!--                <li>Večerka pro děti</li>-->
+                <div class="separator text-center py-3 sep-2">večerka pro děti</div>
+                <li class="tooltip-trigger" data-img="img/alkohol.jpg">Alkohol</li>
+                <li>Další <span class="tooltip-trigger" data-img="img/tanec_3.jpg">tanec</span>, a ještě <span class="tooltip-trigger" data-img="img/tanec_4.jpg">tanec</span></li>
+            </ul>
+        </div>
+        <div class="col-md-4 pt-5">
+            <h3 class="pt-5">Neděle</h3>
+            <ul class="checkbox">
+                <li><span class="tooltip-trigger" data-img="img/cesnek.jpg">Česnečka</span> (Případně <span class="tooltip-trigger" data-img="img/banan.jpg">banán</span>)</li>
+                <li><span class="tooltip-trigger" data-img="img/louceni.jpg">Loučení</span></li>
+                <li>Odjezd (dopoledne)</li>
+            </ul>
+        </div>
+        <div styl="text-center">
+            <h3>Doprovodný program</h3>
+            <ul class="checkbox-fun">
+                <li><span class="tooltip-trigger" data-img="img/koupani.jpg">koupání</span> na <span id="location-town6p">&nbsp;</span></li>
+                <li><span class="tooltip-trigger" data-img="img/sport_1.jpg">sport</span> všeho druhu</li>
+                <li><span class="tooltip-trigger" data-img="img/tanec_5.jpg">tanec</span> kdykoliv a <span class="tooltip-trigger" data-img="img/tanec_6.jpg">kdekoliv</span></li>
+                <li><span class="tooltip-trigger" data-img="img/les.jpg">návštěva lesa</span></li>
+                <li><span class="tooltip-trigger" data-img="img/drevo.jpg">štípání dříví</span></li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 box-sec text-center">
+    <div class="d-flex flex-column m-auto quote px-2">
+        <p class="display-6"><q>Na třicítku jsem se fakt těšil!</q></p>
+        <span data-img="img/ne.jpg" class="h5 align-self-end tooltip-trigger">&mdash; no one ever</span>
+    </div>
+</section>
+
+
+<section class="container py-5 px-3">
+    <h2 class="text-center mb-4">Koncept</h2>
+    <p>Opravdu chci letos dohnat neslavení z přechozích let. Hodně se stalo, co stojí za oslavu.</p>
+    <p>Navíc, kolem mě je spousta <span class="tooltip-trigger" data-img="img/svatba.jpg">svateb</span>. Mě v nejbližší době svatba nečeká, ale chci taky tak dobrou párty! Tak čekejte takový single svatební víkend.</p>
+    <p>Žiju trochu trojí život. Letos bych chtěl slavit s vámi všemi, kdo jste pro mě důležití, a ty tři pilíře spojit do jednoho.</p>
+    <div class="row pt-2">
+        <div class="col-md-4">
+            <h3><span class="tooltip-trigger" data-img="img/matfyz.jpg">Matfyz</span></h3>
+            <ul class="checkbox">
+                <li>ŠMF</li>
+                <li>M&M</li>
+                <li>TESáci</li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h3>AFS</h3>
+            <ul class="checkbox">
+                <li><span class="tooltip-trigger" data-img="img/kos.jpg">KOŠ je orgán</span></li>
+                <li>A i kdo v něm neskončil, večeří s námi dodnes</li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <h3>Liberec</h3>
+            <ul class="checkbox">
+                <li>Rodina</li>
+                <li><span class="tooltip-trigger" data-img="img/Jergym.jpg">JerGym</span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="tonda-cols-2">
+        <div style="flex-shrink: 1" class="box-muted">
+            <p class="text-center my-2">Osobní pozdrav. Tuhle fotku vidíš jenom ty. <3</p>
+            <div style="">
+                <img style="width: 100%; height: auto"  id="personal-img" src="./personal/DvaKohouti.jpg" />
+            </div>
+        </div>
+        <div class="box-pink p-4">
+            <h5 class="">Drbíky - možná se vlastně mezi sebou znáte</h5>
+            <p style="text-align: justify">Ivka zná Gociho. <span class="tooltip-trigger" data-img="img/promoce.jpg">Goci se zná s Evičkou, Hankou i Fandou</span>, i když si to nejspíš nikdo z nich nepamatuje
+                (já si ten večer rozhodně nepamatuju). Goci zná i <span class="tooltip-trigger" data-img="img/pravrah.jpg">Klárku</span>, a Vašek s Evičkou spolu vařili v <span
+                        class="tooltip-trigger" data-img="img/berlin.jpg">Berlíně</span> dávno před KOŠem.
+                Protože Adam zná Ráďu z <span class="tooltip-trigger" data-img="img/kulturak.jpg">kulturáku</span>, a Ráďa byla v Kolíně, i když jindy než Miky, kruh se
+                vlastně uzavřel.
+            </p>
+<!--            <p>-->
+<!--                Hanka zažila LTMF. Na Žluté Plovárně. A Klárka vlastně taky.-->
+<!--            </p>-->
+        </div>
+    </div>
+</section>
+
+<section class="py-5 box-prim text-center">
+    <div class="d-flex flex-column m-auto quote px-2">
+        <p class="display-6"><q>Dárky mi nedávejte. Jediné co potřebuji, je láska.</q></p>
+        <span class="h5 align-self-end">&mdash; to jsem opravdu <span class="tooltip-trigger" data-img="img/poet.jpg">řekl já</span></span>
+    </div>
+</section>
+
+<section class="py-5 container">
+    <div class="tonda-cols-2 pb-4">
+        <div class="box-muted p-4">
+            <h2>Doprava</h2>
+            <p><strong>Areál: </strong><span
+                    id="location-venue">&nbsp;</span>, <a id="location-link" target="_blank">mapa</a></p>
+            <p><strong>Parkování: </strong> Přímo v areálu, nějak se poskládáme.</p>
+            <p><strong><span class="tooltip-trigger" data-img="img/vlakem.jpg">Vlakem:</span> </strong><span id="location-train">&nbsp;</span></p>
+            <p><strong>Spolujízda: </strong>Vyplň v přihlášce a uvidíme.</p>
+            <p><strong><span class="tooltip-trigger" data-img="img/kolo.jpg">Na kole:</span> </strong>Dle vlastního uvážení.</p>
+        </div>
+        <div class="box-muted p-4">
+            <h2>Ubytování</h2>
+            <p>V chatkách <span class="tooltip-trigger" data-img="img/ctyri.jpg">po čtyřech</span>. Případně na pokoji (hlučný, vedle taneční místnosti.).</p>
+            <p>Možno přivést si vlastní stan a usadit se kdekoliv v areálu.</p>
+            <p><span class="tooltip-trigger" data-img="img/sprchy.jpg">Sprchy</span> a toalety <strong>nejsou</strong> na chatce; jsou ve vedlejší budově, max minuta chůze.</p>
+            <p>Dovezte si, prosím, vlastní povlečení nebo spacák.</p>
+        </div>
+    </div>
+    <div class="tonda-cols-3">
+        <div class=" box-sec p-4">
+            <h3 class="tooltip-trigger" data-img="img/dress_code_4.jpg">Dress code</h3>
+            <p>Není potřeba to <span class="tooltip-trigger" data-img="img/dress_code_5.jpg">přehánět</span>.</p>
+            <p>Všechny <span class="tooltip-trigger" data-img="img/dress_code_3.jpg">barvy</span>, <span class="tooltip-trigger"
+                                                                                                          data-img="img/dress_code_1.jpg">účesy</span> a další <span class="tooltip-trigger" data-img="img/dress_code_6.jpg">kreace</span> vítány.</p>
+            <p>Budeme venku, ať je vám pohodlně.</p>
+            <p>Bude vedro, <span class="tooltip-trigger" data-img="img/dress_code_2.jpg">nezapomeňte plavky.</span></p>
+        </div>
+        <div class=" box-tert p-4">
+            <h3><span class="tooltip-trigger" data-img="img/yum.jpg">Jídlo</span></h3>
+            <p>Bude upřesněno před konáním akce.</p>
+            <p><strong>Pátek</strong>: opékání, kdo si co přiveze</p>
+            <p><strong>Sobota</strong>: Bude <span class="tooltip-trigger" data-img="img/jidlo_bude.jpg">drobný raut</span>.<br/><span class="tooltip-trigger"
+                                                                                                                                       data-img="img/vege.jpg">Vegetariánský</span>.
+            </p>
+            <p>Snídaně formou <span class="tooltip-trigger" data-img="img/bufet.jpg">bufetu</span>.</p>
+        </div>
+        <div class=" box-sec p-4">
+            <h3>Děti</h3>
+            <p>S dětmi se počítá po celou dobu.</p>
+            <p>Areál je pro děti doslova jako dělaný - slouží na dětské tábory. <span class="tooltip-trigger" data-img="img/hry_1.jpg">Můžeme řádit!</span></p>
+            <p>Zváno je 9 dětí, takže o společnost postaráno. <span class="tooltip-trigger" data-img="img/nuda.jpg">Nuda</span>  nebude.</p>
+        </div>
+    </div>
+</section>
+
+<section class="text-center py-5 box-prim">
+    <div class="container">
+        <h2>Dary</h2>
+        <p>Jediné, co potřebuji ke štěstí, je láska. Fyzické dary mi opravdu prosím nedávejte.</p>
+        <p>Přijeďte <span class="tooltip-trigger" data-img="img/vyspani.jpg">vyspaní</span>, odpočatí a <span class="tooltip-trigger" data-img="img/usmevavi.jpg">usměvaví</span> -
+            to mi udělá největší radost.</p>
+        <div class="py-3">
+            <div class="separator sep-1">nicméně...</div>
+        </div>
+        <p>Pokud hraješ na kytaru lépe než já, vezmi ji s sebou a užijme si páteční kytarování.</p>
+        <p>Pokud tě baví vařit či péct <span class="tooltip-trigger" data-img="img/ve_velkem.jpg">ve velkém</span>, budu vděčný za pomoc s jídlem.</p>
+        <p>Pokud umíš <span class="tooltip-trigger" data-img="img/fotokoutek_2.jpg">fotit lépe, než můj telefon</span>, udělej na akci nezapomenutelné fotky (ať mám na web za deset let).</p>
+        <p>Moc rád dostanu vytištěnou nějakou <span class="tooltip-trigger" data-img="img/selfie.jpg">společnou fotku</span>, abych si ji mohl dát do rámečku na vzpomínkovou zeď.</p>
+    </div>
+</section>
+
+<section class="cta text-center py-5">
+    <h2>Prosím, potvrď svou účast</h2>
+    <p>ať v tom nemám bordel</p>
+    <a id="form-link-1" class="btn btn-primary" target="_blank">Přijedu!</a>
+    <div class="my-3"></div>
+    <a id="form-link-2" class="btn btn-tertiary border" target="_blank">Nepřijedu nebo nevím - což taky
+        vyplním!</a>
+    </div>
+</section>
+
+<section class="container py-2 text-center" style="color: #b7c4d5">
+    <span class="tooltip-trigger" data-img="img/web.jpg">Web</span> by Tonik &copy; 2025.
+</section>
+
+<script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Preload images
+        const imageUrls = Array.from(document.querySelectorAll('.tooltip-trigger'))
+            .map(el => el.getAttribute('data-img'));
+
+        imageUrls.forEach(url => {
+            const img = new Image();
+            img.src = url;
+        });
+
+        tippy('#tooltip-personal', {content: 'Tuhle fotku vidíš jenom ty'});
+
+        // Initialize Tippy.js for multiple elements
+        tippy('.tooltip-trigger', {
+            content(reference) {
+                const imgSrc = reference.getAttribute('data-img');
+                return `<img src="${imgSrc}" class="tooltip-img">`;
+            },
+            allowHTML: true,
+            interactive: true,
+            trigger: 'mouseenter click',
+            maxWidth: 'none',
+            placement: 'auto',
+        });
+    });
+</script>
+</body>
+</html>
