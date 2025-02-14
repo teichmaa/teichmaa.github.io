@@ -16,12 +16,13 @@
             const encryptedData = await encryptedDataResponse.text()
 
             let password;
-            if (localStorage.getItem("password")) {
-                password = localStorage.getItem("password");
+            const localStorageKey = "passwordV2";
+            if (localStorage.getItem(localStorageKey)) {
+                password = localStorage.getItem(localStorageKey);
             } else {
                 password = prompt("Zadej heslo od Tóni:");
                 if (!password) return;
-                localStorage.setItem("password", password);
+                localStorage.setItem(localStorageKey, password);
             }
             if (!password) {
                 alert('Bez hesla to nepůjde');
