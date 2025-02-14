@@ -42,7 +42,7 @@
             const encryptedData = await encryptedDataResponse.text()
 
             let password;
-            const localStorageKey = "passwordV2";
+            const localStorageKey = "passwordV3";
             if (localStorage.getItem(localStorageKey)) {
                 password = localStorage.getItem(localStorageKey);
             } else {
