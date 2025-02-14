@@ -23,8 +23,6 @@
                 img.src = url;
             });
 
-            tippy('#tooltip-personal', {content: 'Tuhle fotku vidíš jenom ty'});
-
             // Initialize Tippy.js for multiple elements
             tippy('.tooltip-trigger', {
                 content(reference) {
@@ -41,19 +39,24 @@
             const encryptedDataResponse = await fetch('./encryptedData.json');
             const encryptedData = await encryptedDataResponse.text()
 
-            let password;
+            let passPhrase;
             const localStorageKey = "passwordV3";
             if (localStorage.getItem(localStorageKey)) {
-                password = localStorage.getItem(localStorageKey);
+                passPhrase = localStorage.getItem(localStorageKey);
             } else {
-                password = prompt("Zadej heslo od Tóni:");
-                if (!password) return;
+                passPhrase = prompt("Zadej heslo od Tóni:");
+                if (!passPhrase) return;
             }
-            if (!password) {
+            if (!passPhrase) {
                 alert('Bez hesla to nepůjde');
                 document.querySelector("body").remove();
                 return;
             }
+
+            const splitter = passPhrase.match(/V|A|Na|#/)[0];
+            const tokens = passPhrase.split(splitter);
+            const password = tokens[0];
+            const personal = tokens[1] || 'default';
 
             const decryptedData = await decryptData(encryptedData, password);
             const pwdCorrect = decryptedData !== null;
@@ -62,7 +65,7 @@
                 alert("Nesprávné heslo");
                 return;
             } else {
-                localStorage.setItem(localStorageKey, password);
+                localStorage.setItem(localStorageKey, passPhrase);
             }
 
             const data = JSON.parse(decryptedData);
@@ -80,6 +83,11 @@
                 document.querySelector("body").style.display = 'block';
             } else {
                 alert("Něco se pokazilo, data nenačtena. Kontaktuj Tóňu");
+            }
+
+            document.getElementById("personal-img").src = `./personal/${personal}.jpg`;
+            if(personal === 'default') {
+                document.getElementById("personal-text").remove();
             }
         }
     </script>
@@ -192,11 +200,11 @@
             </ul>
         </div>
     </div>
-    <div class="tonda-cols-2">
+    <div class="tonda-cols-2 pt-2">
         <div style="flex-shrink: 1; overflow: hidden" class="box-muted br">
-            <p class="text-center my-2">Osobní pozdrav. Tuhle fotku vidíš jenom ty. <3</p>
+            <p id="personal-text" class="text-center my-2">Osobní pozdrav. Tuhle fotku vidíš jenom ty. <3</p>
             <div style="">
-                <img style="width: 100%; height: auto"  id="personal-img" src="./personal/DvaKohouti.jpg" />
+                <img style="width: 100%; height: auto"  id="personal-img" src="" />
             </div>
         </div>
         <div class="box-pink p-4 br">
