@@ -48,6 +48,31 @@
                 document.querySelector("body").remove();
                 alert("Něco se pokazilo, data nenačtena. Kontaktuj Tóňu");
             }
+
+            // TIPPY
+            // Preload images
+            const imageUrls = Array.from(document.querySelectorAll('.tooltip-trigger'))
+                .map(el => el.getAttribute('data-img'));
+
+            imageUrls.forEach(url => {
+                const img = new Image();
+                img.src = url;
+            });
+
+            tippy('#tooltip-personal', {content: 'Tuhle fotku vidíš jenom ty'});
+
+            // Initialize Tippy.js for multiple elements
+            tippy('.tooltip-trigger', {
+                content(reference) {
+                    const imgSrc = reference.getAttribute('data-img');
+                    return `<img src="${imgSrc}" class="tooltip-img">`;
+                },
+                allowHTML: true,
+                interactive: true,
+                trigger: 'mouseenter click',
+                maxWidth: 'none',
+                placement: 'auto',
+            });
         }
     </script>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
@@ -160,13 +185,13 @@
         </div>
     </div>
     <div class="tonda-cols-2">
-        <div style="flex-shrink: 1" class="box-muted">
+        <div style="flex-shrink: 1; overflow: hidden" class="box-muted br">
             <p class="text-center my-2">Osobní pozdrav. Tuhle fotku vidíš jenom ty. <3</p>
             <div style="">
                 <img style="width: 100%; height: auto"  id="personal-img" src="./personal/DvaKohouti.jpg" />
             </div>
         </div>
-        <div class="box-pink p-4">
+        <div class="box-pink p-4 br">
             <h5 class="">Drbíky - možná se vlastně mezi sebou znáte</h5>
             <p style="text-align: justify">Ivka zná Gociho. <span class="tooltip-trigger" data-img="img/promoce.jpg">Goci se zná s Evičkou, Hankou i Fandou</span>, i když si to nejspíš nikdo z nich nepamatuje
                 (já si ten večer rozhodně nepamatuju). Goci zná i <span class="tooltip-trigger" data-img="img/pravrah.jpg">Klárku</span>, a Vašek s Evičkou spolu vařili v <span
@@ -190,7 +215,7 @@
 
 <section class="py-5 container">
     <div class="tonda-cols-2 pb-4">
-        <div class="box-muted p-4">
+        <div class="box-muted p-4 br">
             <h2>Doprava</h2>
             <p><strong>Areál: </strong><span
                     id="location-venue">&nbsp;</span>, <a id="location-link" target="_blank">mapa</a></p>
@@ -199,7 +224,7 @@
             <p><strong>Spolujízda: </strong>Vyplň v přihlášce a uvidíme.</p>
             <p><strong><span class="tooltip-trigger" data-img="img/kolo.jpg">Na kole:</span> </strong>Dle vlastního uvážení.</p>
         </div>
-        <div class="box-muted p-4">
+        <div class="box-muted p-4 br">
             <h2>Ubytování</h2>
             <p>V chatkách <span class="tooltip-trigger" data-img="img/ctyri.jpg">po čtyřech</span>. Případně na pokoji (hlučný, vedle taneční místnosti.).</p>
             <p>Možno přivést si vlastní stan a usadit se kdekoliv v areálu.</p>
@@ -208,7 +233,7 @@
         </div>
     </div>
     <div class="tonda-cols-3">
-        <div class=" box-sec p-4">
+        <div class=" box-sec p-4 br">
             <h3 class="tooltip-trigger" data-img="img/dress_code_4.jpg">Dress code</h3>
             <p>Není potřeba to <span class="tooltip-trigger" data-img="img/dress_code_5.jpg">přehánět</span>.</p>
             <p>Všechny <span class="tooltip-trigger" data-img="img/dress_code_3.jpg">barvy</span>, <span class="tooltip-trigger"
@@ -216,7 +241,7 @@
             <p>Budeme venku, ať je vám pohodlně.</p>
             <p>Bude vedro, <span class="tooltip-trigger" data-img="img/dress_code_2.jpg">nezapomeňte plavky.</span></p>
         </div>
-        <div class=" box-tert p-4">
+        <div class=" box-tert p-4 br">
             <h3><span class="tooltip-trigger" data-img="img/yum.jpg">Jídlo</span></h3>
             <p>Bude upřesněno před konáním akce.</p>
             <p><strong>Pátek</strong>: opékání, kdo si co přiveze</p>
@@ -225,7 +250,7 @@
             </p>
             <p>Snídaně formou <span class="tooltip-trigger" data-img="img/bufet.jpg">bufetu</span>.</p>
         </div>
-        <div class=" box-sec p-4">
+        <div class=" box-sec p-4 br">
             <h3>Děti</h3>
             <p>S dětmi se počítá po celou dobu.</p>
             <p>Areál je pro děti doslova jako dělaný - slouží na dětské tábory. <span class="tooltip-trigger" data-img="img/hry_1.jpg">Můžeme řádit!</span></p>
@@ -267,29 +292,6 @@
 <script src="bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        // Preload images
-        const imageUrls = Array.from(document.querySelectorAll('.tooltip-trigger'))
-            .map(el => el.getAttribute('data-img'));
-
-        imageUrls.forEach(url => {
-            const img = new Image();
-            img.src = url;
-        });
-
-        tippy('#tooltip-personal', {content: 'Tuhle fotku vidíš jenom ty'});
-
-        // Initialize Tippy.js for multiple elements
-        tippy('.tooltip-trigger', {
-            content(reference) {
-                const imgSrc = reference.getAttribute('data-img');
-                return `<img src="${imgSrc}" class="tooltip-img">`;
-            },
-            allowHTML: true,
-            interactive: true,
-            trigger: 'mouseenter click',
-            maxWidth: 'none',
-            placement: 'auto',
-        });
     });
 </script>
 </body>
