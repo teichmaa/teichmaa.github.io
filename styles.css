@@ -228,6 +228,16 @@ ul.checkbox-fun li::before {
     margin-right: 32px;
 }
 
+@media (min-width: 575px) {
+    .sobota {
+        padding-top: 24px;
+    }
+
+    .nedele {
+        padding-top: 48px;
+    }
+}
+
 @media (max-width: 575px) {
     .tonda-cols-3  > div {
         flex-basis: 100%;
