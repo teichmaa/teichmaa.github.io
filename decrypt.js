@@ -32,7 +32,6 @@ async function decryptData(encryptedData, password) {
         );
         return new TextDecoder().decode(decrypted);
     } catch (e) {
-        alert("Nesprávné heslo");
         return null;
     }
 }

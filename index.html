@@ -48,7 +48,6 @@
             } else {
                 password = prompt("Zadej heslo od Tóni:");
                 if (!password) return;
-                localStorage.setItem(localStorageKey, password);
             }
             if (!password) {
                 alert('Bez hesla to nepůjde');
@@ -57,6 +56,15 @@
             }
 
             const decryptedData = await decryptData(encryptedData, password);
+            const pwdCorrect = decryptedData !== null;
+            if (!pwdCorrect) {
+                document.querySelector("body").remove();
+                alert("Nesprávné heslo");
+                return;
+            } else {
+                localStorage.setItem(localStorageKey, password);
+            }
+
             const data = JSON.parse(decryptedData);
             console.log(data);
             if (data) {
@@ -71,7 +79,6 @@
                 document.getElementById("form-link-2").href = data.formLink;
                 document.querySelector("body").style.display = 'block';
             } else {
-                document.querySelector("body").remove();
                 alert("Něco se pokazilo, data nenačtena. Kontaktuj Tóňu");
             }
         }
