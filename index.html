@@ -12,6 +12,32 @@
     <script src="decrypt.js"></script>
     <script>
         async function unlockContent() {
+
+            // TIPPY
+            // Preload images
+            const imageUrls = Array.from(document.querySelectorAll('.tooltip-trigger'))
+                .map(el => el.getAttribute('data-img'));
+
+            imageUrls.forEach(url => {
+                const img = new Image();
+                img.src = url;
+            });
+
+            tippy('#tooltip-personal', {content: 'Tuhle fotku vidíš jenom ty'});
+
+            // Initialize Tippy.js for multiple elements
+            tippy('.tooltip-trigger', {
+                content(reference) {
+                    const imgSrc = reference.getAttribute('data-img');
+                    return `<img src="${imgSrc}" class="tooltip-img">`;
+                },
+                allowHTML: true,
+                interactive: true,
+                trigger: 'mouseenter click',
+                maxWidth: 'none',
+                placement: 'auto',
+            });
+
             const encryptedDataResponse = await fetch('./encryptedData.json');
             const encryptedData = await encryptedDataResponse.text()
 
@@ -48,31 +74,6 @@
                 document.querySelector("body").remove();
                 alert("Něco se pokazilo, data nenačtena. Kontaktuj Tóňu");
             }
-
-            // TIPPY
-            // Preload images
-            const imageUrls = Array.from(document.querySelectorAll('.tooltip-trigger'))
-                .map(el => el.getAttribute('data-img'));
-
-            imageUrls.forEach(url => {
-                const img = new Image();
-                img.src = url;
-            });
-
-            tippy('#tooltip-personal', {content: 'Tuhle fotku vidíš jenom ty'});
-
-            // Initialize Tippy.js for multiple elements
-            tippy('.tooltip-trigger', {
-                content(reference) {
-                    const imgSrc = reference.getAttribute('data-img');
-                    return `<img src="${imgSrc}" class="tooltip-img">`;
-                },
-                allowHTML: true,
-                interactive: true,
-                trigger: 'mouseenter click',
-                maxWidth: 'none',
-                placement: 'auto',
-            });
         }
     </script>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
