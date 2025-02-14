@@ -131,6 +131,17 @@ body {
     padding: 0;
 }
 
+.hero-parent {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(img/cool.jpg);
+    background-repeat: repeat-x;
+    background-size: cover;
+}
+
+.hero-parent > div {
+    backdrop-filter: blur(3px);
+    width: 100%;
+}
+
 .hero {
     background-image: linear-gradient(
             rgba(0, 0, 0, 0.3),
@@ -139,6 +150,9 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     height: 60vh;
+    max-height: 800px;
+    max-width: 1200px;
+    margin: auto;
     display: flex;
     justify-content: center;
     align-items: center;

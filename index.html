@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="cs" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -69,7 +69,6 @@
             }
 
             const data = JSON.parse(decryptedData);
-            console.log(data);
             if (data) {
                 document.getElementById("when-date").innerText = data.when.date;
                 document.getElementById("when-days").innerText = data.when.days;
@@ -86,7 +85,7 @@
             }
 
             document.getElementById("personal-img").src = `./personal/${personal}.jpg`;
-            if(personal === 'default') {
+            if (personal === 'default') {
                 document.getElementById("personal-text").remove();
             }
         }
@@ -97,10 +96,14 @@
     <link rel="stylesheet" href="tippy.css">
 </head>
 <body onload="unlockContent()" style="display: none">
-<header class="hero text-center text-white d-flex align-items-center justify-content-center">
-    <div class="px-2">
-        <h1 class="display-1 strong fw-bold text-primary">Konečně dospělost</h1>
-        <p class="lead display-6">Roky a roky jsem narozeniny neslavil. Letos to doženeme.</p>
+<header class="text-center text-white hero-parent">
+    <div>
+        <div class="hero d-flex align-items-center justify-content-center">
+            <div class="px-2">
+                <h1 class="display-1 strong fw-bold text-primary">Konečně dospělost</h1>
+                <p class="lead display-6">Roky a roky jsem narozeniny neslavil. Letos to doženeme.</p>
+            </div>
+        </div>
     </div>
 </header>
 
@@ -138,7 +141,7 @@
                 <li><span class="tooltip-trigger" data-img="img/fotokoutek_1.jpg">Fotokoutek</span>, samozřejmě</li>
                 <!--                <li>Večerka pro děti</li>-->
                 <div class="separator text-center py-3 sep-2">večerka pro děti</div>
-                <li class="tooltip-trigger" data-img="img/alkohol.jpg">Alkohol</li>
+                <li><span class="tooltip-trigger" data-img="img/alkohol.jpg">Alkohol</span></li>
                 <li>Další <span class="tooltip-trigger" data-img="img/tanec_3.jpg">tanec</span>, a ještě <span class="tooltip-trigger" data-img="img/tanec_4.jpg">tanec</span></li>
             </ul>
         </div>
@@ -173,9 +176,10 @@
 
 <section class="container py-5 px-3">
     <h2 class="text-center mb-4">Koncept</h2>
-    <p>Opravdu chci letos dohnat neslavení z přechozích let. Hodně se stalo, co stojí za oslavu.</p>
-    <p>Navíc, kolem mě je spousta <span class="tooltip-trigger" data-img="img/svatba.jpg">svateb</span>. Mě v nejbližší době svatba nečeká, ale chci taky tak dobrou párty! Tak čekejte takový single svatební víkend.</p>
-    <p>Žiju trochu trojí život. Letos bych chtěl slavit s vámi všemi, kdo jste pro mě důležití, a ty tři pilíře spojit do jednoho.</p>
+    <p>Jo, fakt chci letos dohnat neslavení z přechozích let. Mega moc věcí, co stojí za oslavu!</p>
+    <p>Navíc, kolem mě je spousta <span class="tooltip-trigger" data-img="img/svatba.jpg">svateb</span>. Mě v nejbližší době svatba nečeká, ale taky chci tak dobrou párty! Tak
+        čekejte takový single svatební víkend.</p>
+    <p>Žiju trochu trojí život. Letos bych chtěl slavit s vámi všemi, kdo jste pro mě důležití, a ty tři pilíře spojit do jednoho:</p>
     <div class="row pt-2">
         <div class="col-md-4">
             <h3><span class="tooltip-trigger" data-img="img/matfyz.jpg">Matfyz</span></h3>
@@ -195,7 +199,7 @@
         <div class="col-md-4">
             <h3>Liberec</h3>
             <ul class="checkbox">
-                <li>Rodina</li>
+                <li><span class="tooltip-trigger" data-img="img/rodina.jpg">Rodina</span></li>
                 <li><span class="tooltip-trigger" data-img="img/Jergym.jpg">JerGym</span></li>
             </ul>
         </div>
@@ -204,20 +208,21 @@
         <div style="flex-shrink: 1; overflow: hidden" class="box-muted br">
             <p id="personal-text" class="text-center my-2">Osobní pozdrav. Tuhle fotku vidíš jenom ty. <3</p>
             <div style="">
-                <img style="width: 100%; height: auto"  id="personal-img" src="" />
+                <img style="width: 100%; height: auto" id="personal-img" src=""/>
             </div>
         </div>
         <div class="box-pink p-4 br">
             <h5 class="">Drbíky - možná se vlastně mezi sebou znáte</h5>
-            <p style="text-align: justify">Ivka zná Gociho. <span class="tooltip-trigger" data-img="img/promoce.jpg">Goci se zná s Evičkou, Hankou i Fandou</span>, i když si to nejspíš nikdo z nich nepamatuje
+            <p style="text-align: justify">Ivka zná Gociho. <span class="tooltip-trigger" data-img="img/promoce.jpg">Goci se zná s Evičkou, Hankou i Fandou</span>, i když si to
+                nejspíš nikdo z nich nepamatuje
                 (já si ten večer rozhodně nepamatuju). Goci zná i <span class="tooltip-trigger" data-img="img/pravrah.jpg">Klárku</span>, a Vašek s Evičkou spolu vařili v <span
                         class="tooltip-trigger" data-img="img/berlin.JPG">Berlíně</span> dávno před KOŠem.
                 Protože Adam zná Ráďu z <span class="tooltip-trigger" data-img="img/kulturak.jpg">kulturáku</span>, a Ráďa byla v Kolíně, i když jindy než Miky, kruh se
                 vlastně uzavřel.
             </p>
-<!--            <p>-->
-<!--                Hanka zažila LTMF. Na Žluté Plovárně. A Klárka vlastně taky.-->
-<!--            </p>-->
+            <!--            <p>-->
+            <!--                Hanka zažila LTMF. Na Žluté Plovárně. A Klárka vlastně taky.-->
+            <!--            </p>-->
         </div>
     </div>
 </section>
@@ -250,10 +255,11 @@
     </div>
     <div class="tonda-cols-3">
         <div class=" box-sec p-4 br">
-            <h3 class="tooltip-trigger" data-img="img/dress_code_4.jpg">Dress code</h3>
+            <h3><span class="tooltip-trigger" data-img="img/dress_code_4.jpg">Dress code</span></h3>
             <p>Není potřeba to <span class="tooltip-trigger" data-img="img/dress_code_5.jpg">přehánět</span>.</p>
             <p>Všechny <span class="tooltip-trigger" data-img="img/dress_code_3.jpg">barvy</span>, <span class="tooltip-trigger"
-                                                                                                          data-img="img/dress_code_1.jpg">účesy</span> a další <span class="tooltip-trigger" data-img="img/dress_code_6.jpg">kreace</span> vítány.</p>
+                                                                                                         data-img="img/dress_code_1.jpg">účesy</span> a další <span
+                    class="tooltip-trigger" data-img="img/dress_code_6.jpg">kreace</span> vítány.</p>
             <p>Budeme venku, ať je vám pohodlně.</p>
             <p>Bude vedro, <span class="tooltip-trigger" data-img="img/dress_code_2.jpg">nezapomeňte plavky.</span></p>
         </div>
@@ -270,7 +276,7 @@
             <h3>Děti</h3>
             <p>S dětmi se počítá po celou dobu.</p>
             <p>Areál je pro děti doslova jako dělaný - slouží na dětské tábory. <span class="tooltip-trigger" data-img="img/hry_1.jpg">Můžeme řádit!</span></p>
-            <p>Zváno je 9 dětí, takže o společnost postaráno. <span class="tooltip-trigger" data-img="img/nuda.jpg">Nuda</span>  nebude.</p>
+            <p>Zváno je 9 dětí, takže o společnost postaráno. <span class="tooltip-trigger" data-img="img/nuda.jpg">Nuda</span> nebude.</p>
         </div>
     </div>
 </section>
@@ -278,16 +284,18 @@
 <section class="text-center py-5 box-prim">
     <div class="container">
         <h2>Dary</h2>
-        <p>Jediné, co potřebuji ke štěstí, je láska. Fyzické dary mi opravdu prosím nedávejte.</p>
-        <p>Přijeďte <span class="tooltip-trigger" data-img="img/vyspani.jpg">vyspaní</span>, odpočatí a <span class="tooltip-trigger" data-img="img/usmevavi.jpg">usměvaví</span> -
-            to mi udělá největší radost.</p>
+        <p>Nic nepotřebuju, fakt jen tu lásku. Fyzické dary mi opravdu prosím nedávejte, z <em>pěti jazyků lásky</em> ke mně nejlépe promlouvá pozornost.</p>
+        <p>Přijeďte <span class="tooltip-trigger" data-img="img/vyspani.jpg">vyspaní</span>, odpočatí a <span class="tooltip-trigger" data-img="img/usmevavi.jpg">usměvaví</span>
+            &#45; to mi udělá největší radost.</p>
         <div class="py-3">
             <div class="separator sep-1">nicméně...</div>
         </div>
         <p>Pokud hraješ na kytaru lépe než já, vezmi ji s sebou a užijme si páteční kytarování.</p>
         <p>Pokud tě baví vařit či péct <span class="tooltip-trigger" data-img="img/ve_velkem.jpg">ve velkém</span>, budu vděčný za pomoc s jídlem.</p>
-        <p>Pokud umíš <span class="tooltip-trigger" data-img="img/fotokoutek_2.jpg">fotit lépe, než můj telefon</span>, udělej na akci nezapomenutelné fotky (ať mám na web za deset let).</p>
-        <p>Moc rád dostanu vytištěnou nějakou <span class="tooltip-trigger" data-img="img/selfie.jpg">společnou fotku</span>, abych si ji mohl dát do rámečku na vzpomínkovou zeď.</p>
+        <p>Pokud umíš <span class="tooltip-trigger" data-img="img/fotokoutek_2.jpg">fotit lépe, než můj telefon</span>, udělej na akci nezapomenutelné fotky (ať mám na web za deset
+            let).</p>
+        <p>Moc rád dostanu vytištěnou nějakou <span class="tooltip-trigger" data-img="img/selfie.jpg">společnou fotku</span>, abych si ji mohl dát do rámečku na vzpomínkovou zeď.
+        </p>
     </div>
 </section>
 
@@ -296,8 +304,15 @@
     <p>ať v tom nemám bordel</p>
     <a id="form-link-1" class="btn btn-primary" target="_blank">Přijedu!</a>
     <div class="my-3"></div>
-    <a id="form-link-2" class="btn btn-tertiary border" target="_blank">Nepřijedu nebo nevím - což taky
-        vyplním!</a>
+    <a id="form-link-2" class="btn btn-tertiary border" target="_blank">Nepřijedu nebo nevím - což taky vyplním!</a>
+</section>
+
+<section class="py-2">
+    <div class="container">
+        <div class="box-muted br p-4">
+            <h3>Dotazy?</h3>
+            <p style="margin-bottom: 0">&rarr; Napiš mi na Messengeru / WhatsAppu. Rád vše zodpovím.</p>
+        </div>
     </div>
 </section>
 

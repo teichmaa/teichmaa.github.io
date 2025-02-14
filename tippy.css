@@ -26,7 +26,7 @@
 .tooltip-trigger {
     cursor: help;
     text-decoration: underline;
-    text-underline-offset: 10%;
+    text-underline-offset: 15%;
     text-decoration-thickness: 3%;
 }
 
