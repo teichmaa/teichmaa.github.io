@@ -22,11 +22,11 @@
             const imageUrls = Array.from(document.querySelectorAll('.tooltip-trigger'))
                 .map(el => el.getAttribute('data-img'));
 
+            new Image().src = 'img/cool.jpg';
             imageUrls.forEach(url => {
                 const img = new Image();
                 img.src = url;
             });
-            new Image().src = 'img/cool.jpg'
 
 
             // Initialize Tippy.js for multiple elements
